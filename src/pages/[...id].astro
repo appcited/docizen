@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { extractFileNameWithoutExtension } from "../utils/extractFileNameWithoutExtension";
+import { assertNotNull } from "../utils/assertNotNull";
+import type { Item, ItemId } from "../components/Item";
+import icon from "../assets/icon.svg";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("docs");
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+function getParentId(id: string): string | undefined {
+  const parts = id.split("/");
+  if (parts.length <= 1) return undefined;
+  parts.pop();
+  return parts.join("/");
+}
+
+function getIdFromPath(path: string): string {
+  const id = path.replace(/^..\/..\/docs\//, "").replace(/\.[^/.]+$/, "")
+  const isIndexId = id.toLowerCase().endsWith("/index");
+  return isIndexId ? getFileSubPaths(id).at(-2)! : id;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+function getFileSubPaths(filePath: string): string[] {
+  const parts = filePath.split("/");
+  return parts.map((_, index) => parts.slice(0, index + 1).join("/"));
+}
+
+const entries = (await getCollection("docs")).sort((a, b) => a.filePath!.localeCompare(b.filePath!));
+const items: Record<ItemId, Item> = {};
+entries.forEach((entry) => {
+  const filePath = assertNotNull(entry.filePath);
+  const fileId = getIdFromPath(filePath)
+  const partialPaths = getFileSubPaths(fileId).slice(0, -1);
+  
+  // create items for all partial directories
+  partialPaths.forEach((partialPath) => {
+    items[partialPath] = {
+      ...items[partialPath],
+      id: partialPath,
+      name: extractFileNameWithoutExtension(partialPath),
+    };
+  });
+
+  // create item for file
+  const isIndexId = fileId.toLowerCase().endsWith("/index");
+  const itemId = isIndexId ? partialPaths.at(-1)! : fileId
+  items[itemId] = {
+    ...items[itemId],
+    id: itemId,
+    name: extractFileNameWithoutExtension(itemId),
+    href: `/${entry.id}`,
+    path: filePath,
+  }
+});
+
+// link children to parents
+Object.values(items).forEach((item) => {
+  const parentId = getParentId(item.id);
+  if (parentId) {
+    item.parentId = parentId;
+    items[parentId].children = items[parentId].children || [];
+    items[parentId].children.push(item);
+  }
+});
+
+const currentItem = items[getIdFromPath(entry.filePath!)];
+---
+
+<Layout pageName="Intra (Alpha)" pageIcon={icon} {items} {currentItem}>
+  <h1>{currentItem.name}</h1>
+  <Content />
+</Layout>

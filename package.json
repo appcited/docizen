@@ -1,0 +1,39 @@
+{
+  "name": "docizen",
+  "type": "module",
+  "version": "0.1.3",
+  "homepage": "https://github.com/appcited/docizen#readme",
+  "bugs": {
+    "url": "https://github.com/appcited/docizen/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appcited/docizen.git"
+  },
+  "bin": {
+    "docizen": "./docizen.mjs"
+  },
+  "scripts": {
+    "clean": "git clean -dfX && npm install",
+    "dev": "astro dev",
+    "build": "astro build",
+    "generate-merged-docs": "powershell scripts/generate-merged-docs.ps1",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.8",
+    "@astrojs/vue": "^5.0.6",
+    "@nanostores/persistent": "^0.10.2",
+    "@nanostores/vue": "^0.11.0",
+    "@tailwindcss/vite": "^4.0.4",
+    "astro": "^5.2.5",
+    "astro-auto-import": "^0.4.4",
+    "astro-expressive-code": "^0.40.1",
+    "astro-pagefind": "^1.8.0",
+    "nanostores": "^0.11.3",
+    "tailwindcss": "^4.0.4",
+    "vue": "^3.5.13",
+    "@iconify/json": "^2.2.304",
+    "unplugin-icons": "^22.0.0"
+  }
+}

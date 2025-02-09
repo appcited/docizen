@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --theme-color-background: oklch(0.18 0.002 17);
+  --theme-color-text: oklch(0.8 0.018 17);
+  --theme-color-text-highlight: oklch(0.9 0.008 17);
+  --theme-color-primary: rgb(254, 64, 67);
+  --theme-color-code: var(--color-neutral-800);
+
+  --theme-color-note: var(--color-blue-300);
+  --theme-color-tip: var(--color-emerald-300);
+  --theme-color-important: var(--color-purple-300);
+  --theme-color-caution: var(--color-orange-300);
+  --theme-color-danger: var(--color-red-300);
+
+  --theme-h1-size: var(--text-3xl);
+  --theme-h2-size: var(--text-2xl);
+  --theme-h3-size: var(--text-xl);
+  --theme-h4-size: var(--text-lg);
+  --theme-h5-size: var(--text-base);
+  --theme-h6-size: var(--text-base);
+
+  --theme-gap: 1rem;
+  --theme-indent-size: 1rem;
+
+  --theme-header-height: 4rem;
+  --theme-sidebar-width: 18rem;
+
+  --text-size: var(--text-base);
+  --text-size-sm: var(--text-sm);
+  --text-weight-bold: 600;
+
+
+  --heading-color: var(--theme-color-text-highlight);
+
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: oklch(0.29 0.005 17);
+  --border: var(--border-width) var(--border-style) var(--border-color);
+
+	--spacing: 1rem;
+
+	--body-spacing-x: 1.5rem;
+	--body-spacing-y: 0.75rem;
+}

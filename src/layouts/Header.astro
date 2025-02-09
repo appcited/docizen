@@ -1,0 +1,117 @@
+---
+import { type ImageMetadata } from "astro"
+import Search from "astro-pagefind/components/Search";
+
+interface Props {
+  pageName: string;
+  pageIcon: ImageMetadata;
+}
+
+const { pageName, pageIcon } = Astro.props;
+---
+
+<header>
+  <div class="start">
+    <img class="page-icon" src={pageIcon.src} alt={pageName}>
+    <span class="page-name">{pageName}</span>
+  </div>
+  <div class="middle">
+    <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false, showSubResults: true }} />
+  </div>
+  <div class="end"></div>
+</header>
+
+<style>
+header {
+  display: flex;
+  height: var(--theme-header-height);
+  padding: var(--body-spacing-y) var(--body-spacing-x);
+  border-bottom: var(--border);
+
+  > * {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    column-gap: var(--spacing);
+  }
+
+  .start {
+    justify-content: flex-start;
+
+    .page-icon {
+      height: 39px;
+      width: 39px;
+    }
+
+    .page-name {
+      color: var(--theme-color-primary);
+      font-weight: var(--text-weight-bold);
+      font-size: 1.25rem;
+      user-select: none;
+    }
+  }
+
+  .middle {
+    justify-content: center;
+  }
+
+  .end {
+    justify-content: flex-end;
+  }
+
+  .pagefind-ui {
+    --pagefind-ui-background: var(--theme-color-background);
+    --pagefind-ui-scale: 0.6;
+    --pagefind-ui-primary: var(--theme-color-primary);
+    --pagefind-ui-text: var(--theme-color-text);
+    --pagefind-ui-border: var(--border-color);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 0.5rem;
+    width: 500px;
+  }
+
+  .pagefind-ui__message {
+    padding: 0 0 0.5rem 0;
+  }
+
+  .pagefind-ui__result-excerpt {
+    font-size: var(--text-xs) !important;
+    padding-bottom: 8px;
+  }
+
+  .pagefind-ui__result-title {
+    font-size: var(--text-size) !important;
+  }
+
+  .pagefind-ui__result-nested {
+    margin-left: 0.5rem;
+  }
+
+  .pagefind-ui__result-link::before {
+    padding-right: 0.5rem;
+  }
+
+  .pagefind-ui__drawer:not(.pagefind-ui__hidden) {
+    position: absolute;
+    margin-top: -0.5rem;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1.5rem;
+    overflow-y: auto;
+    border: var(--border);
+    border-bottom-right-radius: var(--pagefind-ui-border-radius);
+    border-bottom-left-radius: var(--pagefind-ui-border-radius);
+    border-top: 0;
+    background-color: var(--pagefind-ui-background);
+    
+    max-height: 90vh;
+  }
+
+  mark {
+    background-color: var(--theme-color-background);
+    color: var(--theme-color-primary);
+    font-weight: var(--text-weight-bold);
+  }
+}
+</style>

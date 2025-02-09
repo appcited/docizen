@@ -1,0 +1,72 @@
+---
+import type { Item, ItemId } from "../components/Item";
+import Navigation from "../components/Navigation.vue";
+import "../style.css";
+import Header from "./Header.astro";
+import Content from "./Content.astro";
+
+interface Props {
+	pageName: string;
+	pageIcon: ImageMetadata;
+	items: Record<ItemId, Item>;
+	currentItem: Item;
+}
+
+const { pageName, pageIcon, items, currentItem } = Astro.props;
+const rootItems = Object.values(items).filter(item => item.parentId == null)
+---
+
+<!doctype html>
+<html lang="de-DE">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href={pageIcon.src} />
+		<title>{currentItem.name} | {pageName}</title>
+	</head>
+	<body>
+		<Header {pageName} {pageIcon} />
+		<div class="container">
+			<nav>
+				<Navigation client:only items={rootItems} {currentItem} />
+			</nav>
+			<main>
+				<Content class="content">
+					<slot />
+				</Content>
+			</main>
+		</div>
+	</body>
+</html>
+
+<style>
+	html {
+		height: 100%;
+		background-color: var(--theme-color-background);
+		color: var(--theme-color-text);
+	}
+
+	body {
+		height: 100%;
+		min-width: 1024px;
+	}
+
+	.container {
+		display: flex;
+		height: calc(100% - var(--theme-header-height));
+
+		nav {
+			max-height: 100%;
+			width: var(--theme-sidebar-width);
+			padding: var(--body-spacing-x);
+			border-right: var(--border);
+			overflow-y: auto;
+		}
+
+		main {
+			max-height: 100%;
+			width: calc(100% - var(--theme-sidebar-width));
+			overflow-y: auto;
+		}
+	}
+</style>

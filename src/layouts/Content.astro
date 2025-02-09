@@ -1,0 +1,79 @@
+<article data-pagefind-body>
+  <slot />
+</article>
+
+<style>
+article {
+  width: 100%;
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--theme-gap);
+  max-width: 720px;
+  margin: 0 auto;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    font-weight: var(--text-weight-bold);
+    margin-top: 0.5rem;
+  }
+
+  h1 {
+    font-size: var(--theme-h1-size);
+    margin: 1rem 0;
+  }
+
+  h2 {
+    font-size: var(--theme-h2-size);
+  }
+
+  h3 {
+    font-size: var(--theme-h3-size);
+  }
+
+  h4 {
+    font-size: var(--theme-h4-size);
+  }
+
+  h5 {
+    font-size: var(--theme-h5-size);
+  }
+
+  h6 {
+    font-size: var(--theme-h6-size);
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: calc(18px + var(--theme-indent-size));
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: calc(18px + var(--theme-indent-size));
+  }
+
+  ul, ol {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--theme-color-text-highlight);
+    }
+  }
+
+  code {
+    background-color: var(--theme-color-code);
+    border-radius: 2px;
+    padding: 0 4px;
+  }
+
+  line-height: 28px;
+}
+</style>

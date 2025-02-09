@@ -1,0 +1,30 @@
+---
+interface Props {
+	name: keyof typeof icons;
+}
+const { name } = Astro.props;
+
+const icons = {
+	'arrow-right-circle': { icon: () => import('~icons/line-md/arrow-right-circle') },
+	'check-circle': { icon: () => import('~icons/material-symbols/check-circle-outline-rounded') },
+	'emoji-smile': { icon: () => import('~icons/line-md/emoji-smile') },
+	note: { icon: () => import('~icons/material-symbols/info-outline-rounded') },
+	tip: { icon: () => import('~icons/material-symbols/rocket-launch-outline-rounded') },
+	important: { icon: () => import('~icons/material-symbols/error-circle-rounded-outline') },
+	caution: { icon: () => import('~icons/material-symbols/warning-outline-rounded') },
+	danger: { icon: () => import('~icons/material-symbols/dangerous-outline-rounded') }
+} as const;
+
+const IconComponent = (await icons[name].icon()).default;
+---
+
+<IconComponent class="icon" />
+
+<style>
+.icon {
+  display: inline-block;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+}
+</style>

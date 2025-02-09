@@ -1,0 +1,49 @@
+---
+const icons = {
+	note: { icon: () => import('~icons/material-symbols/info-outline-rounded'), title: 'Info' },
+	tip: { icon: () => import('~icons/material-symbols/rocket-launch-outline-rounded'), title: 'Tipp' },
+	important: { icon: () => import('~icons/material-symbols/error-circle-rounded-outline'), title: 'Wichtig' },
+	caution: { icon: () => import('~icons/material-symbols/warning-outline-rounded'), title: 'Warnung' },
+	danger: { icon: () => import('~icons/material-symbols/dangerous-outline-rounded'), title: 'Gefahr' }
+} as const;
+
+interface Props {
+	type?: keyof typeof icons;
+	title?: string;
+}
+
+const { type = 'note', title = icons[type]?.title } = Astro.props;
+const Icon = (await icons[type].icon()).default;
+---
+
+<aside aria-label={title} class={`aside ${type}`} style={`--aside-color: var(--theme-color-${type})`}>
+	<p aria-hidden="true" class="title">
+		<Icon />{title}
+	</p>
+	<div class="content">
+		<slot />
+	</div>
+</aside>
+
+<style>
+aside {
+	border: 1px solid var(--aside-color);
+	border-radius: 8px;
+	padding: 16px;
+	background-color: color-mix(in oklch, var(--aside-color) 10%, transparent);
+	width: 100%;
+
+	.title {
+		display: flex;
+		align-items: center;
+		color: var(--aside-color);
+		gap: 8px;
+		font-weight: var(--text-weight-bold);
+	}
+
+	.content {
+		margin-top: 8px;
+		color: var(--aside-color);
+	}
+}
+</style>
