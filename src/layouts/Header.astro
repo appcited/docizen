@@ -1,6 +1,7 @@
 ---
 import { type ImageMetadata } from "astro"
 import Search from "astro-pagefind/components/Search";
+import Icon from "../components/Icon.astro";
 
 interface Props {
   pageName: string;
@@ -18,7 +19,11 @@ const { pageName, pageIcon } = Astro.props;
   <div class="middle">
     <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false, showSubResults: true }} />
   </div>
-  <div class="end"></div>
+  <div class="end">
+    <a href="https://github.com/ramicro/Intra" target="_blank" class="github">
+      <Icon name="github" />
+    </a>
+  </div>
 </header>
 
 <style>
@@ -57,6 +62,10 @@ header {
 
   .end {
     justify-content: flex-end;
+
+    svg {
+      height: 1.5rem;
+    }
   }
 
   .pagefind-ui {

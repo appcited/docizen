@@ -8,6 +8,7 @@ const icons = {
 	'arrow-right-circle': { icon: () => import('~icons/line-md/arrow-right-circle') },
 	'check-circle': { icon: () => import('~icons/material-symbols/check-circle-outline-rounded') },
 	'emoji-smile': { icon: () => import('~icons/line-md/emoji-smile') },
+	github: { icon: () => import('~icons/mdi/github') },
 	note: { icon: () => import('~icons/material-symbols/info-outline-rounded') },
 	tip: { icon: () => import('~icons/material-symbols/rocket-launch-outline-rounded') },
 	important: { icon: () => import('~icons/material-symbols/error-circle-rounded-outline') },
@@ -23,8 +24,8 @@ const IconComponent = (await icons[name].icon()).default;
 <style>
 .icon {
   display: inline-block;
-  height: 1em;
-  fill: currentColor;
-  vertical-align: -0.125em;
+  height: 1rem;
+	width: auto;
+  vertical-align: -0.125rem;
 }
 </style>
