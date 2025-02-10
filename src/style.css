@@ -20,6 +20,8 @@
   --theme-h5-size: var(--text-base);
   --theme-h6-size: var(--text-base);
 
+  --theme-radius: 0.5rem;
+
   --theme-gap: 1rem;
   --theme-indent-size: 1rem;
 
