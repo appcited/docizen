@@ -33,7 +33,7 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 	</head>
 	<body>
 		<Header {pageName} {pageIcon} />
-		<div class="container">
+		<div class="wrapper">
 			<nav>
 				<Navigation client:only items={rootItems} {currentItem} />
 			</nav>
@@ -58,9 +58,10 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 		min-width: 1024px;
 	}
 
-	.container {
+	.wrapper {
 		display: flex;
 		height: calc(100% - var(--theme-header-height));
+		width: 100%;
 
 		nav {
 			max-height: 100%;
