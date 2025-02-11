@@ -34,6 +34,7 @@ if (args[0] === 'dev') {
     cwd: __dirname,
     env: {
       ...env,
+      PUBLIC_DOCIZEN_ROOT: __dirname,
       PUBLIC_USER_ROOT: env.PUBLIC_USER_ROOT ?? __workingDirectory
     }
   });
