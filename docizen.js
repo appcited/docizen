@@ -20,7 +20,7 @@ if (args[0] === 'dev') {
     cwd: __dirname,
     env: {
       ...env,
-      DOCIZEN_ROOT: env.DOCIZEN_ROOT ?? __workingDirectory
+      PUBLIC_DOCIZEN_ROOT: env.PUBLIC_DOCIZEN_ROOT ?? __workingDirectory
     }
   });
 
@@ -33,7 +33,7 @@ if (args[0] === 'dev') {
     cwd: __dirname,
     env: {
       ...env,
-      DOCIZEN_ROOT: env.DOCIZEN_ROOT ?? __workingDirectory
+      PUBLIC_DOCIZEN_ROOT: env.PUBLIC_DOCIZEN_ROOT ?? __workingDirectory
     }
   });
 

@@ -5,9 +5,13 @@ import { extractFileNameWithoutExtension } from "../utils/extractFileNameWithout
 import { assertNotNull } from "../utils/assertNotNull";
 import type { Item, ItemId } from "../components/Item";
 import icon from "../assets/icon.svg";
+import { getConfig } from "../config";
+import { resolve, relative, parse, posix } from "path";
+
+const config = await getConfig();
 
 export async function getStaticPaths() {
-  const entries = await getCollection("docs");
+  const entries = await getCollection("root");
   return entries.map((entry) => ({
     params: { id: entry.id },
     props: { entry },
@@ -22,7 +26,10 @@ function getParentId(id: string): string | undefined {
 }
 
 function getIdFromPath(path: string): string {
-  const id = path.replace(/^..\/..\/docs\//, "").replace(/\.[^/.]+$/, "")
+  const absolutePath = resolve(import.meta.env.PUBLIC_DOCIZEN_ROOT, path)
+  const relativePath = relative(import.meta.env.PUBLIC_DOCIZEN_ROOT, absolutePath)
+  const normalizedPath = posix.normalize( relativePath.replace(/\\/g, "/"));
+  const id = normalizedPath.replace(/\.[^/.]+$/, "")
   const isIndexId = id.toLowerCase().endsWith("/index");
   return isIndexId ? getFileSubPaths(id).at(-2)! : id;
 }
@@ -35,7 +42,7 @@ function getFileSubPaths(filePath: string): string[] {
   return parts.map((_, index) => parts.slice(0, index + 1).join("/"));
 }
 
-const entries = (await getCollection("docs")).sort((a, b) => a.filePath!.localeCompare(b.filePath!));
+const entries = (await getCollection("root")).sort((a, b) => a.filePath!.localeCompare(b.filePath!));
 const items: Record<ItemId, Item> = {};
 entries.forEach((entry) => {
   const filePath = assertNotNull(entry.filePath);
@@ -76,7 +83,7 @@ Object.values(items).forEach((item) => {
 const currentItem = items[getIdFromPath(entry.filePath!)];
 ---
 
-<Layout pageName="Intra (Alpha)" pageIcon={icon} {items} {currentItem}>
+<Layout pageName={config.name} pageIcon={icon} {items} {currentItem}>
   <h1>{currentItem.name}</h1>
   <Content />
 </Layout>
