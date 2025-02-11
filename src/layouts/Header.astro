@@ -6,9 +6,10 @@ import Icon from "../components/Icon.astro";
 interface Props {
   pageName: string;
   pageIcon: ImageMetadata;
+  pageLinks: string[];
 }
 
-const { pageName, pageIcon } = Astro.props;
+const { pageName, pageIcon, pageLinks } = Astro.props;
 ---
 
 <header>
@@ -20,9 +21,11 @@ const { pageName, pageIcon } = Astro.props;
     <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false, showSubResults: true }} />
   </div>
   <div class="end">
-    <a href="https://github.com/ramicro/Intra" target="_blank" class="github">
-      <Icon name="github" />
-    </a>
+    {pageLinks.map((link) => (
+      <a href={link} target="_blank">
+      {link.startsWith("https://github.com") ? <Icon name="github" /> : <Icon name="globe" />}
+      </a>
+    ))}
   </div>
 </header>
 

@@ -6,7 +6,8 @@ const Config = z.object({
   content: z.array(z.object({
     name: z.string(),
     basePath: z.string(),
-  }))
+  })),
+  links: z.array(z.string()),
 });
 
 export type Config = z.infer<typeof Config>;
@@ -19,6 +20,7 @@ export const defaultConfig = () => ({
       basePath: ".",
     },
   ],
+  links: [],
 } satisfies Partial<Config>);
 
 export const getConfig = async () => {

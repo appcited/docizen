@@ -82,7 +82,7 @@ Object.values(items).forEach((item) => {
 const currentItem = items[getIdFromPath(entry.filePath!)];
 ---
 
-<Layout pageName={config.name} pageIcon={icon} {items} {currentItem}>
+<Layout pageName={config.name} pageIcon={icon} pageLinks={config.links} {items} {currentItem}>
   <h1>{currentItem.name}</h1>
   <Content />
 </Layout>

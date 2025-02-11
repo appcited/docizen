@@ -8,11 +8,12 @@ import Content from "./Content.astro";
 interface Props {
 	pageName: string;
 	pageIcon: ImageMetadata;
+	pageLinks: string[];
 	items: Record<ItemId, Item>;
 	currentItem: Item;
 }
 
-const { pageName, pageIcon, items, currentItem } = Astro.props;
+const { pageName, pageIcon, items, currentItem, pageLinks } = Astro.props;
 const rootItems = Object.values(items).filter(item => item.parentId == null)
 ---
 
@@ -32,7 +33,7 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 		<title>{currentItem.name} | {pageName}</title>
 	</head>
 	<body>
-		<Header {pageName} {pageIcon} />
+		<Header {pageName} {pageIcon} {pageLinks} />
 		<div class="wrapper">
 			<nav>
 				<Navigation client:only items={rootItems} {currentItem} />
