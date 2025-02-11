@@ -1,7 +1,7 @@
 {
   "name": "docizen",
   "type": "module",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "homepage": "https://github.com/appcited/docizen#readme",
   "bugs": {
     "url": "https://github.com/appcited/docizen/issues"

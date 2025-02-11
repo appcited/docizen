@@ -26,12 +26,11 @@ function getParentId(id: string): string | undefined {
 }
 
 function getIdFromPath(path: string): string {
-  const absolutePath = resolve(import.meta.env.PUBLIC_DOCIZEN_ROOT, path)
-  const relativePath = relative(import.meta.env.PUBLIC_DOCIZEN_ROOT, absolutePath)
-  const normalizedPath = posix.normalize( relativePath.replace(/\\/g, "/"));
-  const id = normalizedPath.replace(/\.[^/.]+$/, "")
-  const isIndexId = id.toLowerCase().endsWith("/index");
-  return isIndexId ? getFileSubPaths(id).at(-2)! : id;
+  const relativePathDocizenToUserRoot = relative(import.meta.env.PUBLIC_DOCIZEN_ROOT, import.meta.env.PUBLIC_USER_ROOT);
+  const relativePathUserContent = relative(relativePathDocizenToUserRoot, path, ).replace(/\\/g, "/")
+  const userContentId = relativePathUserContent.replace(/\.[^/.]+$/, "")
+  const isIndexId = userContentId.toLowerCase().endsWith("/index");
+  return isIndexId ? getFileSubPaths(userContentId).at(-2)! : userContentId;
 }
 
 const { entry } = Astro.props;
