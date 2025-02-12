@@ -17,7 +17,6 @@
     "clean": "git clean -dfX && npm install",
     "dev": "astro dev",
     "build": "astro build",
-    "generate-merged-docs": "powershell scripts/generate-merged-docs.ps1",
     "preview": "astro preview"
   },
   "dependencies": {
