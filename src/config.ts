@@ -3,6 +3,7 @@ import { mergeDeepLeft } from "ramda"
 
 const Config = z.object({
   name: z.string(),
+  icon: z.string().url(),
   content: z.array(z.object({
     name: z.string(),
     basePath: z.string(),
@@ -14,6 +15,7 @@ export type Config = z.infer<typeof Config>;
 
 export const defaultConfig = () => ({
   name: "Docizen",
+  icon: `${import.meta.env.PUBLIC_DOCIZEN_ROOT}\\src\\assets\\icon.svg`,
   content: [
     {
       name: "root",

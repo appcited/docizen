@@ -31,6 +31,9 @@ export default defineConfig({
     vue(),
     pagefind()
   ],
+  experimental: {
+    svg: true,
+  },
   vite: {
     plugins: [
       tailwindcss(),

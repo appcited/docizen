@@ -1,21 +1,22 @@
 ---
-import { type ImageMetadata } from "astro"
 import Search from "astro-pagefind/components/Search";
 import Icon from "../components/Icon.astro";
 import ThemeToggle from "../components/ThemeToggle.vue";
 
 interface Props {
   pageName: string;
-  pageIcon: ImageMetadata;
+  pageIconPath: string;
   pageLinks: string[];
 }
 
-const { pageName, pageIcon, pageLinks } = Astro.props;
+const { pageName, pageIconPath, pageLinks } = Astro.props;
+
+const Logo = (await import(/* @vite-ignore */ `file://${pageIconPath}`)).default
 ---
 
 <header>
   <div class="start">
-    <img class="page-icon" src={pageIcon.src} alt={pageName}>
+    <Logo class="page-icon" />
     <span class="page-name">{pageName}</span>
   </div>
   <div class="middle">
@@ -47,14 +48,14 @@ header {
 
   .start {
     justify-content: flex-start;
+    color: var(--theme-color-primary);
 
     .page-icon {
-      height: 39px;
-      width: 39px;
+      height: 32px;
+      width: 32px;
     }
 
     .page-name {
-      color: var(--theme-color-primary);
       font-weight: var(--text-weight-bold);
       font-size: 1.25rem;
       user-select: none;
