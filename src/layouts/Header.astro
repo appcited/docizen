@@ -2,6 +2,7 @@
 import { type ImageMetadata } from "astro"
 import Search from "astro-pagefind/components/Search";
 import Icon from "../components/Icon.astro";
+import ThemeToggle from "../components/ThemeToggle.vue";
 
 interface Props {
   pageName: string;
@@ -26,6 +27,7 @@ const { pageName, pageIcon, pageLinks } = Astro.props;
       {link.startsWith("https://github.com") ? <Icon name="github" /> : <Icon name="globe" />}
       </a>
     ))}
+    <ThemeToggle client:only />
   </div>
 </header>
 
@@ -66,7 +68,7 @@ header {
   .end {
     justify-content: flex-end;
 
-    svg {
+    svg, a {
       height: 1.5rem;
     }
   }
@@ -76,7 +78,7 @@ header {
     --pagefind-ui-scale: 0.6;
     --pagefind-ui-primary: var(--theme-color-primary);
     --pagefind-ui-text: var(--theme-color-text);
-    --pagefind-ui-border: var(--border-color);
+    --pagefind-ui-border: var(--theme-color-border);
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: var(--theme-radius);
     width: 500px;

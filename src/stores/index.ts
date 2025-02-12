@@ -5,3 +5,8 @@ export const $openSidebarItems = persistentAtom("openSidebarItems", { "Einleitun
   encode: JSON.stringify,
   decode: JSON.parse,
 })
+
+export const $theme = persistentAtom("theme", "light" as "light" | "dark", {
+  encode: JSON.stringify,
+  decode: JSON.parse,
+})

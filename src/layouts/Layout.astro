@@ -30,6 +30,10 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 						person_profiles: 'always',
 				})
 		</script>
+		<script is:inline>
+			const localStorageTheme = localStorage?.getItem("theme")
+			document.documentElement.setAttribute('data-theme', JSON.parse(localStorageTheme));
+		</script>
 		<title>{currentItem.name} | {pageName}</title>
 	</head>
 	<body>
