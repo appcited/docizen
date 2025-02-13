@@ -11,12 +11,12 @@ interface Props {
 
 const { pageName, pageIconPath, pageLinks } = Astro.props;
 
-const Logo = (await import(/* @vite-ignore */ `file://${pageIconPath}`)).default
+// const Logo = (await import(/* @vite-ignore */ `file://${pageIconPath}`)).default
 ---
 
 <header>
   <div class="start">
-    <Logo class="page-icon" />
+    <!-- <Logo class="page-icon" /> -->
     <span class="page-name">{pageName}</span>
   </div>
   <div class="middle">

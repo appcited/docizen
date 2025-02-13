@@ -1,12 +1,10 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { extractFileNameWithoutExtension } from "../utils/extractFileNameWithoutExtension";
 import { assertNotNull } from "../utils/assertNotNull";
 import type { Item, ItemId } from "../components/Item";
-import icon from "../assets/icon.svg";
 import { getConfig } from "../config";
-import { relative } from "path";
+import { relative, parse, resolve } from "path";
 
 const config = await getConfig();
 
@@ -18,71 +16,67 @@ export async function getStaticPaths() {
   }));
 }
 
-function getParentId(id: string): string | undefined {
-  const parts = id.split("/");
-  if (parts.length <= 1) return undefined;
-  parts.pop();
-  return parts.join("/");
+function toPartialEntries({ filePath, slug }: { filePath: string; slug: string }) {
+  const filePathParts = filePath.split("/");
+  const slugParts = slug.split("/");
+  return filePathParts.map((_, index) => ({
+    path: filePathParts.slice(0, index + 1).join("/"),
+    slug: slugParts.slice(0, index + 1).join("/"),
+    isFile: index === filePathParts.length - 1,
+  }));
 }
 
-function getIdFromPath(path: string): string {
-  const relativePathDocizenToUserRoot = relative(import.meta.env.PUBLIC_DOCIZEN_ROOT, import.meta.env.PUBLIC_USER_ROOT);
-  const relativePathUserContent = relative(relativePathDocizenToUserRoot, path, ).replace(/\\/g, "/")
-  const userContentId = relativePathUserContent.replace(/\.[^/.]+$/, "")
-  const isIndexId = userContentId.toLowerCase().endsWith("/index");
-  return isIndexId ? getFileSubPaths(userContentId).at(-2)! : userContentId;
-}
+const entries = (await getCollection("root")).sort((a, b) =>
+  a.filePath!.localeCompare(b.filePath!),
+);
+
+const items = entries
+  .map((entry) => {
+    const filePath = assertNotNull(entry.filePath);
+    const absoluteEntryPath = resolve(config._docizenRoot, filePath);
+    const relativeEntryPath = relative(config._userRoot, absoluteEntryPath).replace(/\\/g, "/");
+    return {
+      filePath: relativeEntryPath,
+      slug: entry.id,
+    };
+  })
+  .flatMap(toPartialEntries)
+  .reduce((items, partial) => {
+    // create items for all files and partial directories
+    const parsedPath = parse(partial.path);
+    const isIndexFile = /index/i.test(`${parsedPath.name}`);
+    const id = partial.slug;
+    items[id] = {
+      id,
+      parentId: parse(partial.slug).dir || undefined,
+      name: !isIndexFile ? parsedPath.name : parse(parsedPath.dir).name,
+      href: partial.isFile ? `/${partial.slug}` : items?.[id]?.href,
+      path: partial.isFile ? partial.path : items?.[id]?.path,
+    };
+    return items;
+  }, {} as Record<ItemId, Item>);
+
+// link children to parents
+Object.values(items).forEach((item) => {
+  if (item.parentId) {
+    items[item.parentId].children = items[item.parentId].children || [];
+    items[item.parentId].children!.push(item);
+  }
+});
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-function getFileSubPaths(filePath: string): string[] {
-  const parts = filePath.split("/");
-  return parts.map((_, index) => parts.slice(0, index + 1).join("/"));
-}
-
-const entries = (await getCollection("root")).sort((a, b) => a.filePath!.localeCompare(b.filePath!));
-const items: Record<ItemId, Item> = {};
-entries.forEach((entry) => {
-  const filePath = assertNotNull(entry.filePath);
-  const fileId = getIdFromPath(filePath)
-  const partialPaths = getFileSubPaths(fileId).slice(0, -1);
-  
-  // create items for all partial directories
-  partialPaths.forEach((partialPath) => {
-    items[partialPath] = {
-      ...items[partialPath],
-      id: partialPath,
-      name: extractFileNameWithoutExtension(partialPath),
-    };
-  });
-
-  // create item for file
-  const isIndexId = fileId.toLowerCase().endsWith("/index");
-  const itemId = isIndexId ? partialPaths.at(-1)! : fileId
-  items[itemId] = {
-    ...items[itemId],
-    id: itemId,
-    name: extractFileNameWithoutExtension(itemId),
-    href: `/${entry.id}`,
-    path: filePath,
-  }
-});
-
-// link children to parents
-Object.values(items).forEach((item) => {
-  const parentId = getParentId(item.id);
-  if (parentId) {
-    item.parentId = parentId;
-    items[parentId].children = items[parentId].children || [];
-    items[parentId].children.push(item);
-  }
-});
-
-const currentItem = items[getIdFromPath(entry.filePath!)];
+const currentItem = items[entry.id];
 ---
 
-<Layout pageName={config.name} pageIconPath={config.icon} pageLinks={config.links} {items} {currentItem}>
+<Layout
+  pageName={config.name}
+  pageIconPath={config.icon}
+  pageLinks={config.links}
+  {items}
+  {currentItem}
+>
   <h1>{currentItem.name}</h1>
   <Content />
 </Layout>
