@@ -8,9 +8,6 @@ import expressiveCode from 'astro-expressive-code';
 import pagefind from "astro-pagefind";
 
 export default defineConfig({
-  build: {
-    format: "file",
-  },
   site: "https://animated-goggles-qzngnej.pages.github.io",
   trailingSlash: "never",
   build: {
