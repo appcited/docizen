@@ -16,7 +16,7 @@ const { type = 'note', title = icons[type]?.title } = Astro.props;
 const Icon = (await icons[type].icon()).default;
 ---
 
-<aside aria-label={title} class={`aside ${type}`} style={`--aside-color: var(--theme-color-${type})`}>
+<aside aria-label={title} class={`aside ${type}`} style={`--aside-color: var(--theme-aside-color-${type})`}>
 	<p aria-hidden="true" class="title">
 		<Icon />{title}
 	</p>
@@ -28,7 +28,7 @@ const Icon = (await icons[type].icon()).default;
 <style>
 aside {
 	border: 1px solid var(--aside-color);
-	border-radius: var(--theme-radius);
+	border-radius: var(--theme-border-radius);
 	padding: 16px;
 	background-color: color-mix(in oklch, var(--aside-color) 10%, transparent);
 	width: 100%;
@@ -38,7 +38,7 @@ aside {
 		align-items: center;
 		color: var(--aside-color);
 		gap: 8px;
-		font-weight: var(--text-weight-bold);
+		font-weight: var(--theme-text-weight-bold);
 	}
 
 	.content {

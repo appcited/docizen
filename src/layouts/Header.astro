@@ -36,19 +36,19 @@ const { pageName, pageIconPath, pageLinks } = Astro.props;
 header {
   display: flex;
   height: var(--theme-header-height);
-  padding: var(--body-spacing-y) var(--body-spacing-x);
-  border-bottom: var(--border);
+  padding: var(--theme-body-spacing-y) var(--theme-body-spacing-x);
+  border-bottom: var(--theme-border);
 
   > * {
     display: flex;
     flex: 1;
     align-items: center;
-    column-gap: var(--spacing);
+    column-gap: 1rem;
   }
 
   .start {
     justify-content: flex-start;
-    color: var(--theme-color-primary);
+    color: var(--theme-primary-color);
 
     .page-icon {
       height: 32px;
@@ -56,7 +56,7 @@ header {
     }
 
     .page-name {
-      font-weight: var(--text-weight-bold);
+      font-weight: var(--theme-text-weight-bold);
       font-size: 1.25rem;
       user-select: none;
     }
@@ -75,13 +75,13 @@ header {
   }
 
   .pagefind-ui {
-    --pagefind-ui-background: var(--theme-color-background);
+    --pagefind-ui-background: var(--theme-background-color);
     --pagefind-ui-scale: 0.6;
-    --pagefind-ui-primary: var(--theme-color-primary);
-    --pagefind-ui-text: var(--theme-color-text);
-    --pagefind-ui-border: var(--theme-color-border);
+    --pagefind-ui-primary: var(--theme-primary-color);
+    --pagefind-ui-text: var(--theme-text-color);
+    --pagefind-ui-border: var(--theme-border-color);
     --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: var(--theme-radius);
+    --pagefind-ui-border-radius: var(--theme-border-radius);
     width: 500px;
   }
 
@@ -95,7 +95,7 @@ header {
   }
 
   .pagefind-ui__result-title {
-    font-size: var(--text-size) !important;
+    font-size: var(--theme-text-size) !important;
   }
 
   .pagefind-ui__result-nested {
@@ -114,7 +114,7 @@ header {
     z-index: 9999;
     padding: 1.5rem;
     overflow-y: auto;
-    border: var(--border);
+    border: var(--theme-border);
     border-bottom-right-radius: var(--pagefind-ui-border-radius);
     border-bottom-left-radius: var(--pagefind-ui-border-radius);
     border-top: 0;
@@ -124,9 +124,9 @@ header {
   }
 
   mark {
-    background-color: var(--theme-color-background);
-    color: var(--theme-color-primary);
-    font-weight: var(--text-weight-bold);
+    background-color: var(--theme-background-color);
+    color: var(--theme-primary-color);
+    font-weight: var(--theme-text-weight-bold);
   }
 }
 </style>

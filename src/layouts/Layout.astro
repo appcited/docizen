@@ -55,8 +55,8 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 <style>
 	html {
 		height: 100%;
-		background-color: var(--theme-color-background);
-		color: var(--theme-color-text);
+		background-color: var(--theme-background-color);
+		color: var(--theme-text-color);
 	}
 
 	body {
@@ -72,8 +72,8 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 		nav {
 			max-height: 100%;
 			width: var(--theme-sidebar-width);
-			padding: var(--body-spacing-x);
-			border-right: var(--border);
+			padding: var(--theme-body-spacing-x);
+			border-right: var(--theme-border);
 			overflow-y: auto;
 		}
 

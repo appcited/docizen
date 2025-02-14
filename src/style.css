@@ -1,63 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --theme-color-primary: rgb(254, 64, 67);
-  --theme-color-text: oklch(0.3 0.015 17);
-  --theme-color-text-highlight: oklch(0.36 0.018 17);
-  --theme-color-background: oklch(0.98 0.002 17);
-  --theme-color-border: oklch(0.88 0.009 17);
-  --theme-color-code: var(--color-neutral-200);
+  /* base */
+  --theme-primary-color: rgb(254, 64, 67);
 
-  --theme-color-note: var(--color-blue-800);
-  --theme-color-tip: var(--color-emerald-800);
-  --theme-color-important: var(--color-purple-800);
-  --theme-color-caution: var(--color-orange-800);
-  --theme-color-danger: var(--color-red-800);
+  --theme-background-color: oklch(0.98 0.002 17);
 
-  --theme-h1-size: var(--text-3xl);
-  --theme-h2-size: var(--text-2xl);
-  --theme-h3-size: var(--text-xl);
-  --theme-h4-size: var(--text-lg);
-  --theme-h5-size: var(--text-base);
-  --theme-h6-size: var(--text-base);
+  --theme-text-color: oklch(0.3 0.015 17);
+  --theme-text-color-highlight: oklch(0.36 0.018 17);
+  --theme-text-size: var(--text-base);
+  --theme-text-weight-bold: 600;
+  
+  --theme-border-color: oklch(0.88 0.009 17);
+  --theme-border-width: 1px;
+  --theme-border-style: solid;
+  --theme-border: var(--theme-border-width) var(--theme-border-style) var(--theme-border-color);
+  --theme-border-radius: var(--radius-lg);
 
-  --theme-radius: 0.5rem;
-
-  --theme-content-max-width: 720px;
-
-  --theme-gap: 1rem;
-  --theme-indent-size: 1rem;
+  /* chrome */
+  --theme-body-spacing-x: 1.5rem;
+	--theme-body-spacing-y: 0.75rem;
 
   --theme-header-height: 4rem;
+
   --theme-sidebar-width: 18rem;
 
-  --text-size: var(--text-base);
-  --text-size-sm: var(--text-sm);
-  --text-weight-bold: 600;
+  --theme-navigation-text-size: var(--text-sm);
+  --theme-navigation-heading-size: var(--theme-text-size);
 
+  /* content */
+  --theme-content-max-width: 45rem;
+  --theme-content-gap: 1rem;
+  --theme-content-indent-size: 1rem;
 
-  --heading-color: var(--theme-color-text-highlight);
+  /* elements */
+  --theme-code-color-background: var(--color-neutral-200);
+  --theme-code-border-radius: var(--radius-sm);
+  
+  --theme-aside-color-note: var(--color-blue-800);
+  --theme-aside-color-tip: var(--color-emerald-800);
+  --theme-aside-color-important: var(--color-purple-800);
+  --theme-aside-color-caution: var(--color-orange-800);
+  --theme-aside-color-danger: var(--color-red-800);
 
-  --border-width: 1px;
-  --border-style: solid;
-  --border: var(--border-width) var(--border-style) var(--theme-color-border);
-
-	--spacing: 1rem;
-
-	--body-spacing-x: 1.5rem;
-	--body-spacing-y: 0.75rem;
+  --theme-heading-color: var(--theme-text-color-highlight);
+  --theme-heading-size-1: var(--text-3xl);
+  --theme-heading-size-2: var(--text-2xl);
+  --theme-heading-size-3: var(--text-xl);
+  --theme-heading-size-4: var(--text-lg);
+  --theme-heading-size-5: var(--text-base);
+  --theme-heading-size-6: var(--text-base);
 }
 
-html[data-theme="dark"] {
-  --theme-color-background: oklch(0.18 0.002 17);
-  --theme-color-border: oklch(0.29 0.005 17);
-  --theme-color-text: oklch(0.8 0.018 17);
-  --theme-color-text-highlight: oklch(0.9 0.008 17);
-  --theme-color-code: var(--color-neutral-800);
+:root[data-theme="dark"] {
+  --theme-background-color: oklch(0.18 0.002 17);
+  --theme-border-color: oklch(0.29 0.005 17);
+  --theme-text-color: oklch(0.8 0.018 17);
+  --theme-text-color-highlight: oklch(0.9 0.008 17);
+  --theme-code-color-background: var(--color-neutral-800);
 
-  --theme-color-note: var(--color-blue-300);
-  --theme-color-tip: var(--color-emerald-300);
-  --theme-color-important: var(--color-purple-300);
-  --theme-color-caution: var(--color-orange-300);
-  --theme-color-danger: var(--color-red-300);
+  --theme-aside-color-note: var(--color-blue-300);
+  --theme-aside-color-tip: var(--color-emerald-300);
+  --theme-aside-color-important: var(--color-purple-300);
+  --theme-aside-color-caution: var(--color-orange-300);
+  --theme-aside-color-danger: var(--color-red-300);
 }

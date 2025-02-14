@@ -14,7 +14,7 @@ const props = defineProps<{
 
 <style scoped>
 a[data-active="true"] {
-  color: var(--theme-color-primary);
-  font-weight: var(--text-weight-bold);
+  color: var(--theme-primary-color);
+  font-weight: var(--theme-text-weight-bold);
 }
 </style>

@@ -38,20 +38,20 @@ const handleToggle = (item: Item, event: Event) => {
 
 <style scoped>
 details {
-  --caret-size: var(--text-size);
+  --caret-size: var(--theme-text-size);
   --middle-of-caret: calc(var(--caret-size) / 2);
   --summary-gap: 6px;
   --entry-padding-y: 4px;
-  font-size: var(--text-size-sm);
+  font-size: var(--theme-navigation-text-size);
 
   li {
     margin-left: var(--middle-of-caret);
     padding: var(--entry-padding-y) calc(var(--middle-of-caret) + var(--summary-gap));
-    border-inline-start: var(--border);
+    border-inline-start: var(--theme-border);
 
     &:hover {
-      color: var(--theme-color-text-highlight);
-      border-color: var(--theme-color-text-highlight);
+      color: var(--theme-text-color-highlight);
+      border-color: var(--theme-text-color-highlight);
     }
   }
 
@@ -73,9 +73,9 @@ summary {
   padding: var(--entry-padding-y) 0;
   display: flex;
   align-items: center;
-  font-size: var(--text-size);
-  font-weight: var(--text-weight-bold);
-  color: var(--theme-color-text-highlight);
+  font-size: var(--theme-navigation-heading-size);
+  font-weight: var(--theme-text-weight-bold);
+  color: var(--theme-text-color-highlight);
   user-select: none;
   column-gap: var(--summary-gap);
 }
