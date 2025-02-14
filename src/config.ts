@@ -30,7 +30,7 @@ export const defaultConfig = () => ({
 } satisfies Partial<Config>);
 
 export const getConfig = async () => {
-  const userConfigFile = await import(`file://${import.meta.env.PUBLIC_USER_ROOT}\\.docizen\\config.mjs`)
+  const userConfigFile = await import(/* @vite-ignore */`file://${import.meta.env.PUBLIC_USER_ROOT}\\.docizen\\config.mjs`)
   const mergedConfig = mergeDeepLeft(userConfigFile.default, defaultConfig());
   return Config.parse(mergedConfig);
 };
