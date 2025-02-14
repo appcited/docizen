@@ -19,7 +19,7 @@
     "preview": "astro preview",
     "clean": "git clean -dfX && npm install"
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/ramda": "^0.30.2",
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/vue": "^5.0.6",
