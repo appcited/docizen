@@ -3,6 +3,10 @@
   "configurations": [
     {
       "command": "./node_modules/.bin/astro dev",
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "PUBLIC_DOCIZEN_ROOT": "${workspaceFolder}",
+      },
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal"
