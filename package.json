@@ -14,12 +14,13 @@
     "docizen": "./docizen.js"
   },
   "scripts": {
-    "clean": "git clean -dfX && npm install",
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "clean": "git clean -dfX && npm install"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@types/ramda": "^0.30.2",
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/vue": "^5.0.6",
     "@iconify/json": "^2.2.304",
@@ -36,8 +37,5 @@
     "unplugin-icons": "^22.0.0",
     "vue": "^3.5.13",
     "zod": "^3.24.1"
-  },
-  "devDependencies": {
-    "@types/ramda": "^0.30.2"
   }
 }
