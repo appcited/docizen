@@ -67,9 +67,9 @@ Object.values(items).forEach((item) => {
 });
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
-const currentItem = items[entry.id];
+const currentItem = { ...items[entry.id], headings };
 ---
 
 <Layout
@@ -79,6 +79,5 @@ const currentItem = items[entry.id];
   {items}
   {currentItem}
 >
-  <h1>{currentItem.name}</h1>
   <Content />
 </Layout>

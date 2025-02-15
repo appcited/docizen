@@ -15,6 +15,7 @@ interface Props {
 
 const { pageName, pageIconPath, items, currentItem, pageLinks } = Astro.props;
 const rootItems = Object.values(items).filter(item => item.parentId == null)
+const hasTopLevelHeading = currentItem.headings?.some(heading => heading.depth === 1) ?? false
 // const pageIconFile = await import(/* @vite-ignore */ `${pathToFileURL(pageIconPath).href}?url`)
 ---
 
@@ -45,6 +46,7 @@ const rootItems = Object.values(items).filter(item => item.parentId == null)
 			</nav>
 			<main>
 				<Content class="content">
+					{ !hasTopLevelHeading && <h1>{currentItem.name}</h1> }
 					<slot />
 				</Content>
 			</main>
