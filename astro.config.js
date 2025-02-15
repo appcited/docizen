@@ -14,7 +14,7 @@ export default defineConfig({
     format: "preserve"
   },
   redirects: {
-    "/": "/einleitung/willkommen",
+    "/": "/readme",
   },
   integrations: [
     expressiveCode(),

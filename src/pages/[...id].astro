@@ -26,9 +26,11 @@ function toPartialEntries({ filePath, slug }: { filePath: string; slug: string }
   }));
 }
 
-const entries = (await getCollection("root")).sort((a, b) =>
-  a.filePath!.localeCompare(b.filePath!),
-);
+const entries = (await getCollection("root")).sort((a, b) => {
+  if (a.id.toLowerCase() === "readme") return -1;
+  if (b.id.toLowerCase() === "readme") return 1;
+  return a.filePath!.localeCompare(b.filePath!);
+});
 
 const items = entries
   .map((entry) => {
