@@ -20,13 +20,13 @@
     "clean": "git clean -dfX && npm install"
   },
   "dependencies": {
-    "@types/ramda": "^0.30.2",
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/vue": "^5.0.6",
     "@iconify/json": "^2.2.304",
     "@nanostores/persistent": "^0.10.2",
     "@nanostores/vue": "^0.11.0",
     "@tailwindcss/vite": "^4.0.4",
+    "@types/ramda": "^0.30.2",
     "astro": "^5.2.5",
     "astro-auto-import": "^0.4.4",
     "astro-expressive-code": "^0.40.1",

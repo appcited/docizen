@@ -11,7 +11,7 @@ article {
   max-width: var(--theme-content-max-width);
   margin: 0 auto;
 
-  h1, h2, h3, h4, h5, h6, ul, ol, aside, p, img, details {
+  h1, h2, h3, h4, h5, h6, ul, ol, aside, p, img, details, pre, blockquote, table, iframe {
     margin-top: var(--theme-content-gap);
   }
 
@@ -102,6 +102,13 @@ article {
     background-color: var(--theme-code-color-background);
     border-radius: var(--theme-code-border-radius);
     padding: 0 4px;
+  }
+
+  iframe {
+    border-radius: var(--theme-border-radius);
+    width: 100%;
+    /* 16:9 aspect ratio */
+    height: calc(var(--theme-content-max-width) / 16 * 9);
   }
 }
 </style>
